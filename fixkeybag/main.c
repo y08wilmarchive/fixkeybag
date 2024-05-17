@@ -11,6 +11,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <dlfcn.h>
+#include <spawn.h>
+extern char **environ;
 
 bool checkKeybagExistance() {
     
@@ -58,6 +60,7 @@ int main() {
             
             printf("System keybag already exists, no need to create new\n");
         }
+        execvp("/usr/libexec/keybagd.bak", (char **)&(const char*[]){ "/usr/libexec/keybagd.bak", NULL });
         
     } else {
         
